@@ -1,0 +1,48 @@
+---
+
+- step:
+    name: Train model pytorch
+    image: ufoym/deepo:py36
+    command: 
+      - pip install torchtext
+      - python train.py {parameters}
+    parameters:
+      - name: epochs
+        pass-as: --epochs={v}
+        description: Number of epochs to run the trainer
+        type: integer
+        default: 1
+      - name: learning_rate
+        pass-as: --learning_rate={v}
+        description: Initial learning rate
+        type: float
+        default: 0.001
+      - name: dropout
+        pass-as: --dropout={v}
+        description: Keep probability for training dropout
+        type: float
+        default: 0.9
+      - name: batch_size
+        pass-as: --batch_size={v}
+        description: Number of element in each batch
+        type: integer
+        default: 32
+      - name: embedding_size
+        pass-as: --embedding_size={v}
+        description: Size of embedding word vectors
+        type: integer
+        default: 300
+    inputs:
+      - name: word_vectors
+      - name: dataset
+
+- step:
+    name: Worker environment check
+    image: ufoym/deepo:py36
+    command:
+      - pwd
+      - ls -la
+      - nvidia-smi
+      - python --version
+      - nvcc --version | grep release
+      - cat /usr/include/x86_64-linux-gnu/cudnn_v*.h | grep CUDNN_MAJOR -A 2
