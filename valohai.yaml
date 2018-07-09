@@ -24,7 +24,7 @@
         default: 0.9
       - name: batch_size
         pass-as: --batch_size={v}
-        description: Number of element in each batch
+        description: Number of elements in each batch
         type: integer
         default: 32
       - name: embedding_size
