@@ -155,7 +155,7 @@ def run_epoch(data_iter, model, criterion, TEXT, optimizer=None):
     return total_loss/nb_item, acc_y_sum/nb_item
 
 def train():
-    INPUTS_DIR = os.getenv('VH_INPUTS_DIR','/stockage/Research_Team_Ressources/valohai_test/')#,'/valohai/inputs/')
+    INPUTS_DIR = os.getenv('VH_INPUTS_DIR','/valohai/inputs/')#,'/stockage/Research_Team_Ressources/valohai_test/')
     dataset_path = get_first_file(os.path.join(INPUTS_DIR, 'dataset'))
     word_vectors_path = get_first_file((os.path.join(INPUTS_DIR, 'word_vectors')))
                                        
@@ -216,12 +216,10 @@ def train():
     
     # Saving weights and biases as outputs of the task.
     outputs_dir = os.getenv('VH_OUTPUTS_DIR', '/valohai/outputs/')
-    for i, ws in enumerate(all_weights):
-        filename = os.path.join(outputs_dir, 'mytraining.pt')
-        model.save_state_dict(filename)
-    for i, bs in enumerate(all_biases):
-        filename_text = os.path.join(outputs_dir, 'text.pickle')
-        pickle.dump(TEXT,filename_text)
+    filename = os.path.join(outputs_dir, 'mytraining.pt')
+    model.save_state_dict(filename)
+    filename_text = os.path.join(outputs_dir, 'text.pickle')
+    pickle.dump(TEXT,filename_text)
         
         
 
