@@ -238,10 +238,10 @@ if __name__ == '__main__':
     parser.add_argument('--embedding_size', type=int, default=300,
                         help='Size of embedding word vectors')
     FLAGS, unparsed = parser.parse_known_args()
-    print("number of epochs : " + FLAGS.epochs)
-    print("learning_rate : " + FLAGS.learning_rate)
-    print("dropout : " + FLAGS.dropout)
-    print("batch_size : " + FLAGS.batch_size)
-    print("embedding_size : " + FLAGS.embedding_size)
+    print("number of epochs : " + str(FLAGS.epochs))
+    print("learning_rate : " + str(FLAGS.learning_rate))
+    print("dropout : " + str(FLAGS.dropout))
+    print("batch_size : " + str(FLAGS.batch_size))
+    print("embedding_size : " + str(FLAGS.embedding_size))
     train()
     
