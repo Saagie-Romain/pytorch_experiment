@@ -147,6 +147,7 @@ def run_epoch(data_iter, model, criterion, TEXT, optimizer=None):
             optimizer.step()
             
             if (i+1) % 1000 == 0:
+                print(json.dumps({'step': i+1, 'accuracy': temp_acc_y_sum/temp_nb_item}))
                 print ('Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}' .format(i+1, nb_batches, temp_total_loss/temp_nb_item, temp_acc_y_sum/temp_nb_item))
                 temp_acc_y_sum = 0
                 temp_nb_item = 0
