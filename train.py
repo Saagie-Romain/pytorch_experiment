@@ -152,7 +152,8 @@ def run_epoch(data_iter, model, criterion, TEXT, optimizer=None):
                 temp_acc_y_sum = 0
                 temp_nb_item = 0
                 temp_total_loss = 0
-    
+                
+    print(json.dumps({'accuracy': acc_y_sum/nb_item}))
     return total_loss/nb_item, acc_y_sum/nb_item
 
 def train():
@@ -201,7 +202,7 @@ def train():
    
     # Loss and optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    optimizer = torch.optim.Adam(model.parameters(), lr=FLAGS.learning_rate)
     criterion.to(device)
     
     num_epoch = FLAGS.epochs
@@ -217,8 +218,8 @@ def train():
     
     # Saving weights and biases as outputs of the task.
     outputs_dir = os.getenv('VH_OUTPUTS_DIR', '/valohai/outputs/')
-    filename = os.path.join(outputs_dir, 'mytraining.pt')
-    model.save_state_dict(filename)
+    filename = os.path.join(outputs_dir, 'model.pth')
+    torch.save(model, filename)
     filename_text = os.path.join(outputs_dir, 'text.pickle')
     pickle.dump(TEXT,filename_text)
         
